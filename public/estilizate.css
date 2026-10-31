@@ -1,0 +1,201 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e6e6e6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Título principal */
+.encabezado {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.encabezado h1 {
+    font-size: 2rem;
+    font-weight: 400;
+    color: #000;
+}
+
+/* Contenedor principal */
+.contenedor {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 50px;
+}
+
+/* Tarjeta del formulario */
+.formulario-card {
+    background-color: #1f2148;
+    width: 90%;
+    max-width: 800px;
+    padding: 35px;
+    border-radius: 25px;
+}
+
+/* Título del formulario */
+.titulo-formulario {
+    text-align: center;
+    color: white;
+    font-size: 2.2rem;
+    margin-bottom: 35px;
+    font-weight: bold;
+}
+
+/* Formulario */
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* Cada fila */
+.grupo-campo {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    gap: 20px;
+}
+
+.grupo-campo label {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.grupo-campo input {
+    height: 50px;
+    border: none;
+    border-radius: 15px;
+    background-color: #5c607f;
+    padding: 0 15px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+}
+
+.grupo-campo input:focus {
+    border: 2px solid #8ebcff;
+}
+
+/* Botones */
+.grupo-botones {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.btn {
+    border: none;
+    border-radius: 25px;
+    padding: 12px 25px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* Colores de botones */
+.btn-guardar {
+    background-color: #59d493;
+    color: #000;
+}
+
+.btn-ordenar {
+    background-color: #f5e26d;
+    color: #000;
+}
+
+.btn-calculos {
+    background-color: #8cb2f3;
+    color: #000;
+}
+.grupo-campo {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    gap: 20px;
+}
+
+.grupo-campo label {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.grupo-campo select {
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    border: none;
+    border-radius: 15px;
+    background-color: #5c607f;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    outline: none;
+}
+
+.grupo-campo select:focus {
+    border: 2px solid #8cb2f3;
+}
+
+/* Estilo de las opciones */
+.grupo-campo option {
+    background-color: #1f2148;
+    color: white;
+}
+
+#salida {
+    width: 100%;
+    min-height: 150px;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    background-color: #5c607f;
+    color: white;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    resize: vertical;
+    outline: none;
+    overflow-y: auto;
+}
+
+#salida:focus {
+    border: 2px solid #8cb2f3;
+}
+
+@media (max-width: 768px) {
+    .grupo-campo {
+        grid-template-columns: 1fr;
+    }
+
+    .grupo-campo label {
+        margin-bottom: 5px;
+    }
+
+    .titulo-formulario {
+        font-size: 1.8rem;
+    }
+
+    .encabezado h1 {
+        font-size: 1.5rem;
+    }
+}

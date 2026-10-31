@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Paquete</title>
+    <link rel="stylesheet" href="estilizate.css">
+    <script type="module" src="main.js"></script>
+</head>
+<body>
+
+    <header class="encabezado">
+        <h1>Proyecto final de curso de Estructura de Datos</h1>
+    </header>
+
+    <main class="contenedor">
+        <section class="formulario-card">
+            <h2 class="titulo-formulario">Registro de paquete</h2>
+
+            <form class="formulario" id="elFormulario">
+
+                <div class="grupo-campo">
+                    <label for="idPaquete">
+                        Identificador del paquete:
+                    </label>
+                    <input type="text" id="id" name="idPaquete">
+                </div>
+
+                <div class="grupo-campo">
+                    <label for="destino">
+                        Destino:
+                    </label>
+                    <input type="text" id="destino" name="destino">
+                </div>
+
+                <div class="grupo-campo">
+                    <label for="weight">
+                        Peso:
+                    </label>
+                    <input type="number" id="peso" name="peso">
+                </div>
+
+                <div class="grupo-campo">
+                    <label for="status">Estado:</label>
+
+                    <select id="status" name="status">
+                        <option value="recibido">Recibido</option>
+                        <option value="entransito">En tránsito</option>
+                        <option value="entregado">Entregado</option>
+                    </select>
+                </div>
+
+                <div class="grupo-botones">
+                    <button type="submit" id="Guardar" class="btn btn-guardar">
+                        GUARDAR
+                    </button>
+
+                    <button type="button" id="ordenar" class="btn btn-ordenar">
+                        ORDENAR
+                    </button>
+
+                    <button type="button" id="calcular" class="btn btn-calculos">
+                        CALCULOS
+                    </button>
+                </div>
+                
+                <textarea title="textarea" id="salida" readonly>Salida---</textarea>
+            </form>
+        </section>
+    </main>
+
+</body>
+</html>
