@@ -3,12 +3,17 @@ const app = express();
 const PORT = 7000;
 const path = require('path');
 
+
+app.use('/src', express.static('src'));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/casita', (req, res) => {
     const { id, destino, peso, status } = req.body;
-    res.json({id, destino, peso, status});
+
+    const respuesta = {id,destino,peso,status,timestamp: Date.now()};
+
+    res.json(respuesta);
 });
 
 app.get('/casita', (req, res) => {
