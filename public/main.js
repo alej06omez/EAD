@@ -5,11 +5,12 @@ const salida = document.getElementById('salida');
 const btnOrdenar = document.getElementById("ordenar");
 const btnMostrar = document.getElementById("mostrar");
 const btnCalcular = document.getElementById("calcular");
+const btnLimpiar = document.getElementById("limpiar");
 
 btnOrdenar.addEventListener('click', ordenarPaquetes);
 btnMostrar.addEventListener('click', mostrarPaquetes);
 btnCalcular.addEventListener('click', calcular);
-
+btnLimpiar.addEventListener('click', limpiarSalida);
 let paquetesBD = [];
 let ordenado = false;
 
@@ -44,6 +45,9 @@ function ordenarPaquetes() { //no contiene la parte de recorrer y lo de la compl
         salida.value = 'No hay paquetes ingresados.';
         return;
     }}
+function limpiarSalida() {
+    salida.value = '';
+}
 //hasta aqui se extrae al utils
 
 
@@ -95,4 +99,9 @@ btnCalcular.addEventListener('click', (event) => {
 btnOrdenar.addEventListener('click', (event) => {
     event.preventDefault();
     ordenarPaquetes();
+});
+
+btnLimpiar.addEventListener('click', (event) => {
+    event.preventDefault();
+    limpiarSalida();
 });
