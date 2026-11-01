@@ -123,6 +123,11 @@ body {
     color: #000;
 }
 
+.btn-mostrar {
+    background-color: #ffafd4;
+    color: #000;
+}
+
 .btn-calculos {
     background-color: #8cb2f3;
     color: #000;

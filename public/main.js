@@ -1,35 +1,24 @@
-import {Paquete} from './src/Paquete.js';
+import {Paquete} from '../src/Paquete.js';
 
 const formulario = document.getElementById('elFormulario');
 const salida = document.getElementById('salida');
 const btnOrdenar = document.getElementById("ordenar");
+const btnMostrar = document.getElementById("mostrar");
 const btnConsultar = document.getElementById("calcular");
 
 btnOrdenar.addEventListener('click',ordenarVehiculos);
+btnMostrar.addEventListener('click',mostrarVehiculos);
 btnConsultar.addEventListener('click',listarVehiculos);
 
 let PaqueteBD = []
 let ordenado = false;
 
-function mostrarInformacion(paquete) {
-    return `
-ID: ${paquete.id}
-Destino: ${paquete.destino}
-Peso: ${paquete.peso}
-Estado: ${paquete.status}
-    `;
-}
 
-function ingresarPaquete(){
-    let id = document.getElementById("id").value;
-    let destino = document.getElementById("destino").value;
-    let peso = document.getElementById("peso").value;
-    let status = document.getElementById("status").value;
-    let timpestamp; //por definir tambien
 
-    let obj = new Paquete(id,destino,peso,status,timpestamp)
-    PaqueteBD.push(obj)
-    salida.value = obj.toString();
+function ingresarPaquete(id, destino, peso, status, timestamp) {
+    let obj = new Paquete(id, destino, peso, status, timestamp);
+    PaqueteBD.push(obj);
+    return obj.toString();
 }
 
 
@@ -55,7 +44,7 @@ formulario.addEventListener('submit', async (event) => {
 
         const resultado = await respuesta.json();
 
-        
+        salida.value = ingresarPaquete(resultado.id, resultado.destino, resultado.peso, resultado.status, resultado.timestamp);
 
 
     } catch (error) {
