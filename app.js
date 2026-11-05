@@ -4,16 +4,17 @@ const PORT = 7000;
 const path = require('path');
 
 
+
 app.use('/src', express.static('src'));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.text());
+
 
 app.post('/casita', (req, res) => {
-    const { laInfo } = req.body;
+    const texto = req.body;
 
-    const respuesta = { laInfo };
-
-    res.json(respuesta);
+    res.json(texto);
 });
 
 app.get('/casita', (req, res) => {

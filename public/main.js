@@ -88,15 +88,15 @@ function limpiarSalida() {
 formulario.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const textoPaquete = formulario.querySelector('textarea').value;
+    const textoPaquete = document.getElementById('laInfo').value;
     //no lo muevan
     try {
         const respuesta = await fetch('/casita', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'text/plain'
             },
-            body: JSON.stringify({ cadena: textoPaquete })
+            body: textoPaquete
         });
 
         if (!respuesta.ok) {
