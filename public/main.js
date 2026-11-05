@@ -10,44 +10,46 @@ const btnLimpiar = document.getElementById("limpiar");
 
 let paquetesBD = [];
 let destinosBD = [];
+// hasta aqui O(1) -- lo de arriba
 
 // Funciones - extraer al src/utils o algo asi - revisar doc
 
 //Separar paquete (usada para ingresar varios paquetes de golpe desde un texto)
-function separarpaquete(cadena) {
-    console.log('Tipo:', typeof cadena, 'Valor:', cadena); 
-    const [destinos, paquetesJuntos] = cadena.split('--');
+function separarpaquete(cadena) { //O(n^2)
+    console.log('Tipo:', typeof cadena, 'Valor:', cadena); //O(1)
+    const [destinos, paquetesJuntos] = cadena.split('--'); //O(n)=O(n)
     
-    console.log(paquetesBD);
-    console.log(destinosBD);
-    ingresarDestinos(destinos);
+    console.log(paquetesBD); //O(1)
+    console.log(destinosBD); //O(1)
+    ingresarDestinos(destinos); //O(n)
 
-    return paquetesJuntos.split(';').map((paquete) => {
-        const [id, destino, peso, status, timestamp] = paquete.split(' ');
-        return { id, destino, peso, status, timestamp };
+    //O(n)=(n) = O(n^2)
+    return paquetesJuntos.split(';').map((paquete) => { //O(n)=(n) = O(n)
+        const [id, destino, peso, status, timestamp] = paquete.split(' ');//O(n)=(n) = O(n)
+        return { id, destino, peso, status, timestamp }; //O(1)=O(n)
     });
 }
 
-//Crear objeto(s) a partir de un texto con el formato "destino1,destino2-id,destino,peso,status,timestamp;..."
-function ingresarPaquete(cadena) {
-    const paquetes = separarpaquete(cadena); // arreglo de paquetes
+
+function ingresarPaquete(cadena) { //O(n^2)
+    const paquetes = separarpaquete(cadena); // arreglo de paquetes O(n^2)
 
     const textos = paquetes.map((p) => {
-        const obj = new Paquete(p.id, p.destino, p.peso, p.status, p.timestamp);
-        paquetesBD.push(obj);
-        return obj.toString();
-    });
+        const obj = new Paquete(p.id, p.destino, p.peso, p.status, p.timestamp); //O(1)
+        paquetesBD.push(obj);//O(1)
+        return obj.toString();//O(1)
+    }); //O(n) = O(n)
 
     return textos.join('\n');
 }
 //Separa destinos y los guarda en el arreglo de destinos
-function ingresarDestinos(cadenaDestinos) {
-    const nuevos = cadenaDestinos.split(',').map(nombre => new Destinos(nombre.trim()));
-    destinosBD.push(...nuevos);
-    return nuevos;
+function ingresarDestinos(cadenaDestinos) { //O(n)
+    const nuevos = cadenaDestinos.split(',').map(nombre => new Destinos(nombre.trim())); //O(n) = O(n)
+    destinosBD.push(...nuevos); //O(1)
+    return nuevos; //O(1)
 }
 
-function mostrarPaquetes() {
+function mostrarPaquetes() { //solo esta esto de manera funcional, revisar docs
     salida.value = '';
     if (paquetesBD.length === 0) {
         salida.value = 'No hay paquetes ingresados.';
@@ -63,7 +65,7 @@ function mostrarPaquetes() {
 }
 
 // TODO: aquí falta definir qué debe calcular (ej: peso total, cantidad por destino, etc.)
-function calcular() {
+function calcular() { 
     if (paquetesBD.length === 0) {
         salida.value = 'No hay paquetes ingresados.';
         return;
@@ -81,7 +83,7 @@ function ordenarPaquetes() {
     mostrarPaquetes();
 }
 
-function limpiarSalida() {
+function limpiarSalida() { //O(1)
     salida.value = '';
 }
 //hasta aqui se extrae al utils
@@ -91,7 +93,7 @@ formulario.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const textoPaquete = document.getElementById('laInfo').value;
-    //no lo muevan
+    //no lo muevan O(1) -- lo de arriba
     try {
         const respuesta = await fetch('/casita', {
             method: 'POST',
@@ -99,16 +101,18 @@ formulario.addEventListener('submit', async (event) => {
                 'Content-Type': 'text/plain'
             },
             body: textoPaquete
-        });
+        }); //O(1)
 
         if (!respuesta.ok) {
             salida.value = 'Ocurrió un error.';
             return;
-        }
+        } //o(1)
 
-        const guardado = await respuesta.json();
+        const guardado = await respuesta.json(); //o(1)
 
-        const paquete = ingresarPaquete(guardado);
+        const paquete = ingresarPaquete(guardado); //o(n^2)
+
+        //de aqui para abajo es O(1)
         salida.value = 'Paquete ingresado correctamente.\n';
         salida.value += paquete;
     } catch (error) {
