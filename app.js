@@ -9,9 +9,9 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/casita', (req, res) => {
-    const { id, destino, peso, status } = req.body;
+    const { laInfo } = req.body;
 
-    const respuesta = {id,destino,peso,status,timestamp: Date.now()};
+    const respuesta = { laInfo };
 
     res.json(respuesta);
 });
