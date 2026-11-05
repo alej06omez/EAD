@@ -176,7 +176,7 @@ body {
     color: white;
 }
 
-#salida {
+.formulario-control  {
     width: 100%;
     min-height: 150px;
     padding: 15px;

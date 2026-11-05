@@ -20,34 +20,10 @@
             <form class="formulario" id="elFormulario">
 
                 <div class="grupo-campo">
-                    <label for="idPaquete">
-                        Identificador del paquete:
+                    <label for="Info">
+                        Ingrese los datos del paquete:
                     </label>
-                    <input type="text" id="id" name="id">
-                </div>
-
-                <div class="grupo-campo">
-                    <label for="destino">
-                        Destino:
-                    </label>
-                    <input type="text" id="destino" name="destino">
-                </div>
-
-                <div class="grupo-campo">
-                    <label for="weight">
-                        Peso:
-                    </label>
-                    <input type="number" id="peso" name="peso">
-                </div>
-
-                <div class="grupo-campo">
-                    <label for="status">Estado:</label>
-
-                    <select id="status" name="status">
-                        <option value="recibido">Recibido</option>
-                        <option value="entransito">En tránsito</option>
-                        <option value="entregado">Entregado</option>
-                    </select>
+                    <textarea class="formulario-control" id="laInfo" name="laInfo"></textarea>
                 </div>
 
                 <div class="grupo-botones">
@@ -68,7 +44,8 @@
                     </button>
                 </div>
                 
-                <textarea title="textarea" id="salida" readonly>Salida---</textarea>
+                
+                <textarea title="textarea" class="formulario-control" id="salida" readonly>Salida---</textarea>
             </form>
             <button type="button" id="limpiar" name="limpiar" class="btn btn-limpiar">
                 LIMPIAR
