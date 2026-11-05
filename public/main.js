@@ -17,11 +17,13 @@ let destinosBD = [];
 function separarpaquete(cadena) {
     console.log('Tipo:', typeof cadena, 'Valor:', cadena); 
     const [destinos, paquetesJuntos] = cadena.split('--');
-
+    
+    console.log(paquetesBD);
+    console.log(destinosBD);
     ingresarDestinos(destinos);
 
     return paquetesJuntos.split(';').map((paquete) => {
-        const [id, destino, peso, status, timestamp] = paquete.split(',');
+        const [id, destino, peso, status, timestamp] = paquete.split(' ');
         return { id, destino, peso, status, timestamp };
     });
 }
