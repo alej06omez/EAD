@@ -8,7 +8,7 @@ const path = require('path');
 app.use('/src', express.static('src'));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.text());
+app.use(express.text({ limit: '10mb' }));
 
 
 app.post('/casita', (req, res) => {
