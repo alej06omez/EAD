@@ -117,6 +117,8 @@ formulario.addEventListener('submit', async (event) => {
 
         if (signal.aborted) return;
 
+        if (signal.aborted) return;
+
         if (!respuesta.ok) {
             salida.value = 'Ocurrió un error.';
             return;
