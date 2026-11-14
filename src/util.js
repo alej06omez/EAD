@@ -47,6 +47,8 @@ export function leerCaso(caso) {
 
 // Calcula los totales por destino y devuelve el ranking como texto.
 // Tiempo O(n + m + k + n log n) y espacio auxiliar O(n + k).
+
+
 export function generarRanking(destinos, paquetes) {
     // Inicializa los n destinos en cero. O(n) tiempo y espacio.
     const estadisticas = new Map();

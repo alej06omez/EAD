@@ -8,6 +8,7 @@ const btnOrdenar = document.getElementById("ordenar");
 const btnMostrar = document.getElementById("mostrar");
 const btnCalcular = document.getElementById("calcular");
 const btnLimpiar = document.getElementById("limpiar");
+const btnCleanSalida = document.getElementById("cleanSalida");
 
 let paquetesBD = [];
 const destinosBD = new Set();
@@ -162,4 +163,9 @@ btnOrdenar.addEventListener('click', (event) => {
 btnLimpiar.addEventListener('click', (event) => {
     event.preventDefault();
     limpiarCaso();
+});
+
+btnCleanSalida.addEventListener('click', (event) => {
+    event.preventDefault();
+    salida.value = '';
 });
