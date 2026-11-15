@@ -69,27 +69,6 @@ function mostrarPaquetes(inicio, fin) {
     }
 }
 
-function buscarPaquete(paqueteNuevo) {
-    const indice = paquetesBD.findIndex(
-        p => p.id === paqueteNuevo.id
-    );
-
-    // No existe: se agrega como nuevo
-    if (indice === -1) {
-        paquetesBD.push(paqueteNuevo);
-        return;
-    }
-
-    // Existe: obtener el paquete existente para comparar
-    const paqueteExistente = paquetesBD[indice];
-
-    // Comparar fechas y actualizar si el nuevo es más reciente
-    if (paqueteNuevo.timestamp > paqueteExistente.timestamp) {
-        paquetesBD[indice] = paqueteNuevo;
-    }
-}
-
-
 // Muestra el ranking de los destinos cargados.
 // Tiempo O(n + m + k + n log n) y espacio auxiliar O(n + k).
 function mostrarRanking() {
