@@ -23,14 +23,16 @@ function ingresarPaquete(cadena) {
     for (const destino of destinos) {
         destinosBD.add(destino);
     }
-
     // Crea los m paquetes y sus líneas de salida en O(m) tiempo y espacio.
+
     const textos = paquetes.map((p) => {
         const obj = new Paquete(p.id, p.destino, p.peso, p.estado, p.timestamp);
-        paquetesBD.push(obj);
+        paquetesBD.push(obj)
         return obj.toString();
     });
-
+    let paquetesGuardados=consolidarPaquetes(paquetesBD)
+    paquetesBD = []
+    paquetesBD = paquetesGuardados
     // Une las m líneas en O(m) tiempo y espacio.
     return textos.join('\n');
 }
@@ -68,26 +70,26 @@ function mostrarPaquetes(inicio, fin) {
     }
 }
 
-// Muestra la cantidad de paquetes distintos y su peso total.
-// Tiempo O(m + k) y espacio auxiliar O(k).
-function calcular() {
-    if (paquetesBD.length === 0) {
-        salida.value = 'No hay paquetes ingresados.';
+function buscarPaquete(paqueteNuevo) {
+    const indice = paquetesBD.findIndex(
+        p => p.id === paqueteNuevo.id
+    );
+
+    // No existe: se agrega como nuevo
+    if (indice === -1) {
+        paquetesBD.push(paqueteNuevo);
         return;
     }
 
-    // Conserva los k paquetes en O(m + k) tiempo y O(k) espacio.
-    const consolidados = consolidarPaquetes(paquetesBD);
+    // Existe: obtener el paquete existente para comparar
+    const paqueteExistente = paquetesBD[indice];
 
-    // Suma los k pesos en O(k) tiempo y O(1) espacio adicional.
-    const pesoTotal = consolidados.reduce(
-        (suma, p) => suma + Number(p.peso), 0
-    );
-
-    salida.value =
-        `Cantidad de paquetes diferentes: ${consolidados.length}\n` +
-        `Peso total: ${pesoTotal}`;
+    // Comparar fechas y actualizar si el nuevo es más reciente
+    if (paqueteNuevo.timestamp > paqueteExistente.timestamp) {
+        paquetesBD[indice] = paqueteNuevo;
+    }
 }
+
 
 // Muestra el ranking de los destinos cargados.
 // Tiempo O(n + m + k + n log n) y espacio auxiliar O(n + k).

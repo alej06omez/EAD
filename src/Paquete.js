@@ -18,7 +18,7 @@ export class Paquete {
         this.timestamp = timestamp;
     }
 
-    // Devuelve el registro como texto. O(1) si los campos tienen longitud acotada.
+    // Devuelve el registro como texto. O(1)
     toString() {
         return "id:" + this.id +
             " destino:[" + this.destino.toString() + "]" +
