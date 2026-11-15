@@ -15,7 +15,6 @@ export function consolidarPaquetes(paquetes) {
             recientes.set(paquete.id, paquete);
         }
     }
-
     // Copia los k registros elegidos en O(k) tiempo y espacio.
     return Array.from(recientes.values());
 }
