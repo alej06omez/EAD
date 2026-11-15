@@ -6,7 +6,6 @@ const entrada = document.getElementById('laInfo');
 const salida = document.getElementById('salida');
 const btnOrdenar = document.getElementById("ordenar");
 const btnMostrar = document.getElementById("mostrar");
-const btnCalcular = document.getElementById("calcular");
 const btnLimpiar = document.getElementById("limpiar");
 const btnCleanSalida = document.getElementById("cleanSalida");
 
@@ -163,12 +162,6 @@ btnMostrar.addEventListener('click', (event) => {
         let textomostrar = mostrarPaquetes(inicio, final);
         salida.value = textomostrar;
     }
-});
-
-// Calcula los totales globales.
-btnCalcular.addEventListener('click', (event) => {
-    event.preventDefault();
-    calcular();
 });
 
 // Genera y muestra el ranking por destino.

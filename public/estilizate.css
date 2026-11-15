@@ -128,11 +128,6 @@ body {
     color: #000;
 }
 
-.btn-calculos {
-    background-color: #8cb2f3;
-    color: #000;
-}
-
 .btn-limpiar {
     background-color: #a51e1e;
     grid-template-columns: 1fr 2fr;
