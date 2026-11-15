@@ -37,20 +37,27 @@ function ingresarPaquete(cadena) {
 }
 
 // Lista los registros cargados y muestra su fecha.
-function mostrarPaquetes() {
-    salida.value = '';
-    if (paquetesBD.length === 0) {
-        salida.value = 'No hay paquetes ingresados.';
-        return;
+function mostrarPaquetes(inicio, fin) {
+
+    if (inicio > 2) {
+        return 'revisate los rangos';}
+
+    if (inicio === fin) {
+        return salida.value +=paquetesBD[inicio].toString() + '\n\n';
     }
-    // Reescribir el texto acumulado en cada vuelta puede costar O(m²).
+
     // El texto mostrado ocupa O(m) espacio.
-    for (let i = 0; i < paquetesBD.length; i++) {
-        const fechaLegible = new Date(paquetesBD[i].timestamp).toLocaleString();
-        salida.value +=
-            paquetesBD[i].toString() +
-            '\nFecha: ' + fechaLegible +
-            '\n\n';
+    //recursividad
+    else{
+        let cuarto = Math.floor((inicio + fin) / 2);
+        //let r1 = mostrarPaquetes (inicio, inicio + cuarto -1)
+        //let r2 = mostrarPaquetes(inicio + cuarto, inicio + 2*cuarto -1)
+        //let r3 = mostrarPaquetes(inicio + 2*cuarto, inicio + 3*cuarto - 1)
+        //let r4 = mostrarPaquetes(inicio * 3*cuarto, fin)
+
+        let r1 = mostrarPaquetes(inicio, cuarto);
+        let r2 = mostrarPaquetes(cuarto + 1, fin);
+        return r1 + r2 //+ r3 + r4
     }
 }
 
@@ -144,7 +151,16 @@ formulario.addEventListener('submit', async (event) => {
 // Muestra los registros guardados.
 btnMostrar.addEventListener('click', (event) => {
     event.preventDefault();
-    mostrarPaquetes();
+    salida.value = '';
+    if (paquetesBD.length === 0) {
+        salida.value = 'No hay paquetes ingresados.';
+        return;
+    }
+    else{
+        let inicio = 0;
+        let final = paquetesBD.length - 1;
+    mostrarPaquetes(inicio, final);
+    }
 });
 
 // Calcula los totales globales.
