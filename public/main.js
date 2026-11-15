@@ -8,10 +8,10 @@ const btnOrdenar = document.getElementById("ordenar");
 const btnMostrar = document.getElementById("mostrar");
 const btnCalcular = document.getElementById("calcular");
 const btnLimpiar = document.getElementById("limpiar");
+const btnCleanSalida = document.getElementById("cleanSalida");
 
 let paquetesBD = [];
 const destinosBD = new Set();
-let controladorGuardado = new AbortController();
 
 // n: destinos, m: registros, k: paquetes distintos. Se suponen campos acotados.
 
@@ -36,20 +36,35 @@ function ingresarPaquete(cadena) {
 }
 
 // Lista los registros cargados y muestra su fecha.
-function mostrarPaquetes() {
-    salida.value = '';
-    if (paquetesBD.length === 0) {
-        salida.value = 'No hay paquetes ingresados.';
-        return;
+function mostrarPaquetes(inicio, fin) {
+
+    if (inicio > fin || inicio >= paquetesBD.length) {
+        return 'revisate los rangos';}
+
+    if (inicio === fin) {
+        return paquetesBD[inicio].toString() + '\n\n';
     }
-    // Reescribir el texto acumulado en cada vuelta puede costar O(m²).
+    if (fin - inicio < 4) {
+        let resultado = "";
+
+        for (let i = inicio; i <= fin; i++) {
+            resultado += paquetesBD[i].toString() + "\n\n";
+        }
+
+        return resultado;
+    }
     // El texto mostrado ocupa O(m) espacio.
-    for (let i = 0; i < paquetesBD.length; i++) {
-        const fechaLegible = new Date(paquetesBD[i].timestamp).toLocaleString();
-        salida.value +=
-            paquetesBD[i].toString() +
-            '\nFecha: ' + fechaLegible +
-            '\n\n';
+    //recursividad
+    else{
+        let rango = fin - inicio;
+        let cuarto = Math.floor(rango/4);
+        
+        let r1 = mostrarPaquetes (inicio, inicio + cuarto -1)
+        let r2 = mostrarPaquetes(inicio + cuarto, inicio + ((2*cuarto) -1))
+        let r3 = mostrarPaquetes(inicio + (2*cuarto), inicio + ((3*cuarto) - 1))
+        let r4 = mostrarPaquetes(inicio + (3*cuarto), fin)
+
+        return r1 + r2 + r3 + r4
     }
 }
 
@@ -90,8 +105,7 @@ function mostrarRanking() {
 
 // Cancela los guardados pendientes y vacía la entrada, la salida y los datos.
 function limpiarCaso() {
-    controladorGuardado.abort();
-    controladorGuardado = new AbortController();
+    
     paquetesBD = [];
     destinosBD.clear();
     entrada.value = '';
@@ -103,7 +117,6 @@ formulario.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const textoPaquete = entrada.value;
-    const { signal } = controladorGuardado;
     try {
         // La transferencia procesa O(L) bytes para una entrada de tamaño L.
         const respuesta = await fetch('/casita', {
@@ -112,12 +125,7 @@ formulario.addEventListener('submit', async (event) => {
                 'Content-Type': 'text/plain'
             },
             body: textoPaquete,
-            signal
         });
-
-        if (signal.aborted) return;
-
-        if (signal.aborted) return;
 
         if (!respuesta.ok) {
             salida.value = 'Ocurrió un error.';
@@ -126,7 +134,7 @@ formulario.addEventListener('submit', async (event) => {
 
         // Decodifica la respuesta en O(L) tiempo y espacio.
         const guardado = await respuesta.json();
-        if (signal.aborted) return;
+        
 
         const paquete = ingresarPaquete(guardado);
 
@@ -134,7 +142,6 @@ formulario.addEventListener('submit', async (event) => {
         salida.value = 'Paquete ingresado correctamente.\n';
         salida.value += paquete;
     } catch (error) {
-        if (signal.aborted) return;
         salida.value = 'Error con el servidor.';
         console.error(error);
     }
@@ -143,7 +150,17 @@ formulario.addEventListener('submit', async (event) => {
 // Muestra los registros guardados.
 btnMostrar.addEventListener('click', (event) => {
     event.preventDefault();
-    mostrarPaquetes();
+    salida.value = '';
+    if (paquetesBD.length === 0) {
+        salida.value = 'No hay paquetes ingresados.';
+        return;
+    }
+    else{
+        let inicio = 0;
+        let final = paquetesBD.length - 1;
+        let textomostrar = mostrarPaquetes(inicio, final);
+        salida.value = textomostrar;
+    }
 });
 
 // Calcula los totales globales.
@@ -162,4 +179,10 @@ btnOrdenar.addEventListener('click', (event) => {
 btnLimpiar.addEventListener('click', (event) => {
     event.preventDefault();
     limpiarCaso();
+});
+
+btnCleanSalida.addEventListener('click', (event) => {
+    event.preventDefault();
+    salida.value = '';
+    entrada.value = '';
 });

@@ -134,14 +134,29 @@ body {
 }
 
 .btn-limpiar {
-    background-color: #7a69fe;
+    background-color: #a51e1e;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    gap: 20px;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.btn-cleanSalida {
+    background-color: #5348ab;
     grid-template-columns: 1fr 2fr;
     align-items: center;
     gap: 20px;
     margin-top: 25px;
+    margin-left: 10px;
     border: none;
     padding: 12px 25px;
     font-size: 1.3rem;
+    color: white;
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.2s ease, opacity 0.2s ease;
@@ -153,27 +168,8 @@ body {
     font-weight: bold;
 }
 
-.grupo-campo select {
-    width: 100%;
-    height: 50px;
-    padding: 0 15px;
-    border: none;
-    border-radius: 15px;
-    background-color: #5c607f;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    outline: none;
-}
-
 .grupo-campo select:focus {
     border: 2px solid #8cb2f3;
-}
-
-/* Estilo de las opciones */
-.grupo-campo option {
-    background-color: #1f2148;
-    color: white;
 }
 
 .formulario-control  {
@@ -193,22 +189,4 @@ body {
 
 #salida:focus {
     border: 2px solid #8cb2f3;
-}
-
-@media (max-width: 768px) {
-    .grupo-campo {
-        grid-template-columns: 1fr;
-    }
-
-    .grupo-campo label {
-        margin-bottom: 5px;
-    }
-
-    .titulo-formulario {
-        font-size: 1.8rem;
-    }
-
-    .encabezado h1 {
-        font-size: 1.5rem;
-    }
 }
